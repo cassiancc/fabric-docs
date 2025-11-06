@@ -91,6 +91,12 @@ This can be done in our **common initializer** by using `PayloadTypeRegistry.pla
 
 A similar method exists to register client-to-server payloads: `PayloadTypeRegistry.playC2S().register`.
 
+If you suspect your payload will be greater than the maximum size allowed by the vanilla packet (32502 bytes), you can instead use `registerLarge` to opt-in to Fabric's built-in packet splitter.
+
+```java
+PayloadTypeRegistry.playS2C().registerLarge(SummonLightningS2CPayload.ID, SummonLightningS2CPayload.CODEC, 20971534);
+```
+
 ### Sending a Packet to the Client {#sending-a-packet-to-the-client}
 
 To send a packet with our custom payload, we can use `ServerPlayNetworking.send` which takes in a `ServerPlayerEntity`
