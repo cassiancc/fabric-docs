@@ -4,6 +4,8 @@ import java.util.concurrent.CompletableFuture;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.references.BlockItemIds;
+import net.minecraft.references.ItemIds;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -30,11 +32,11 @@ public class ExampleModItemTagProvider extends FabricTagsProvider.ItemTagsProvid
 	protected void addTags(HolderLookup.Provider wrapperLookup) {
 		// :::datagen-tags:provider
 		// :::datagen-tags:build
-		valueLookupBuilder(SMELLY_ITEMS)
-				.add(Items.SLIME_BALL)
-				.add(Items.ROTTEN_FLESH)
+		builder(SMELLY_ITEMS)
+				.add(ItemIds.SLIME_BALL)
+				.add(ItemIds.ROTTEN_FLESH)
 				.addOptionalTag(ItemTags.DIRT)
-				.add(Items.OAK_PLANKS)
+				.add(BlockItemIds.OAK_PLANKS)
 				.forceAddTag(ItemTags.BANNERS)
 				.setReplace(true);
 		// :::datagen-tags:build

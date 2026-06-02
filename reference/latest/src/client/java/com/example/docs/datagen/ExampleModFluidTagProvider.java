@@ -18,7 +18,7 @@ public class ExampleModFluidTagProvider extends FabricTagsProvider.FluidTagsProv
 
 	@Override
 	protected void addTags(HolderLookup.Provider wrapperLookup) {
-		valueLookupBuilder(ModFluidTags.ACID).add(ModFluids.ACID_STILL, ModFluids.ACID_FLOWING);
-		valueLookupBuilder(FluidTags.WATER).addTag(ModFluidTags.ACID);
+		builder(ModFluidTags.ACID).add(ModFluids.ACID_STILL_KEY, ModFluids.ACID_FLOWING_KEY);
+		builder(FluidTags.WATER).addTag(ModFluidTags.ACID);
 	}
 }

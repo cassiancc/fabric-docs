@@ -82,7 +82,8 @@ public class ExampleModWorldConfiguredFeatures {
 				BlockStateProvider.simple(Blocks.GOLD_BLOCK),
 				new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
 
-				new TwoLayersFeatureSize(0, 0, 0)
+				new TwoLayersFeatureSize(0, 0, 0),
+				BlockStateProvider.simple(Blocks.DIRT)
 		).build();
 		// :::datagen-world:tree-feature-config
 
