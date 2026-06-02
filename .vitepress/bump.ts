@@ -34,10 +34,11 @@ if (!newVersion) {
 } else if (newVersion === oldVersion || fs.existsSync(`./reference/${newVersion}`)) {
   console.error(`'Minecraft ${newVersion}' already exists!`);
   process.exit(1);
-} else if (!/^[0-9]+[.][0-9]+([.][0-9]+)?$/.test(newVersion)) {
-  console.error(`'${newVersion}' does not look like a stable Minecraft version!`);
-  process.exit(1);
-}
+} 
+// else if (!/^[0-9]+[.][0-9]+([.][0-9]+)?$/.test(newVersion)) {
+//   console.error(`'${newVersion}' does not look like a stable Minecraft version!`);
+//   process.exit(1);
+// }
 console.log(`New version: 'Minecraft ${newVersion}'`);
 
 if (git("rev-parse", "--verify", `refs/heads/port/${newVersion}`).status === 0) {
