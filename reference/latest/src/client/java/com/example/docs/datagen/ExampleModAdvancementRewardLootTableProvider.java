@@ -33,4 +33,9 @@ public class ExampleModAdvancementRewardLootTableProvider extends SimpleFabricLo
 				)
 		);
 	}
+
+	@Override
+	public void run() {
+
+	}
 }

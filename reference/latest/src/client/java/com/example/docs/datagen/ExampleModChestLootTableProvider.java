@@ -39,5 +39,12 @@ public class ExampleModChestLootTableProvider extends SimpleFabricLootTableSubPr
 		// #endregion datagen_loot_tables_chest_loot
 		// #region datagen_loot_tables_chest_provider
 	}
+
+	@Override
+	public void run() {
+		generate((key, builder) -> {
+
+		});
+	}
 }
 // #endregion datagen_loot_tables_chest_provider

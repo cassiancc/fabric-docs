@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_crafting_table": {
+    "has_leather_gloves": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:crafting_table"
+            "items": "example-mod:leather_gloves"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "example-mod:crafting_table"
+        "recipes": "example-mod:leather_gloves_dyed"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_crafting_table"
+      "has_leather_gloves"
     ]
   ],
   "rewards": {
     "recipes": [
-      "example-mod:crafting_table"
+      "example-mod:leather_gloves_dyed"
     ]
   }
 }

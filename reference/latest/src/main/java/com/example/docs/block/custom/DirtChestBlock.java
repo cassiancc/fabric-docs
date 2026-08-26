@@ -21,11 +21,6 @@ public class DirtChestBlock extends BaseEntityBlock {
 		super(properties);
 	}
 
-	@Override
-	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return simpleCodec(DirtChestBlock::new);
-	}
-
 	// #region use
 	@Override
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {

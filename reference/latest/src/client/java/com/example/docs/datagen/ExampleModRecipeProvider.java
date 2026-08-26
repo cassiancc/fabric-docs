@@ -4,12 +4,14 @@ package com.example.docs.datagen;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
@@ -24,14 +26,16 @@ import net.fabricmc.fabric.api.resource.conditions.v1.ResourceConditions;
 import com.example.docs.ExampleMod;
 import com.example.docs.item.ModItems;
 
+import net.minecraft.world.item.crafting.Recipe;
+
 public class ExampleModRecipeProvider extends FabricRecipeProvider {
 	public ExampleModRecipeProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 
 	@Override
-	protected RecipeProvider createRecipeProvider(HolderLookup.Provider registryLookup, RecipeOutput exporter) {
-		return new RecipeProvider(registryLookup, exporter) {
+	protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, BootstrapContext<Recipe<?>> recipeContext, BootstrapContext<Advancement> advancementContext) {
+		return new RecipeProvider(recipeContext, advancementContext) {
 			@Override
 			public void buildRecipes() {
 				HolderLookup.RegistryLookup<Item> itemLookup = registries.lookupOrThrow(Registries.ITEM);
@@ -97,6 +101,9 @@ public class ExampleModRecipeProvider extends FabricRecipeProvider {
 				// #region datagen_recipes_dye
 				dyedItem(ModItems.LEATHER_GLOVES, "leather_gloves");
 				// #endregion datagen_recipes_dye
+				// #region brewing_recipes
+				new ExampleModBrewingProvider(output).buildRecipes();
+				// #endregion brewing_recipes
 				// #region datagen_recipes_provider
 			}
 		};

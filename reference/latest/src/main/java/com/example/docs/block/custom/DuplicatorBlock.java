@@ -28,11 +28,6 @@ public class DuplicatorBlock extends BaseEntityBlock {
 		super(settings);
 	}
 
-	@Override
-	protected MapCodec<? extends BaseEntityBlock> codec() {
-		return simpleCodec(DuplicatorBlock::new);
-	}
-
 	// #region block
 	@Nullable
 	@Override

@@ -17,19 +17,19 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.component.Compostable;
 import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.component.Consumables;
+import net.minecraft.world.item.component.CookingFuel;
 import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -38,8 +38,6 @@ import net.minecraft.world.level.block.Block;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
-import net.fabricmc.fabric.api.registry.CompostableRegistry;
-import net.fabricmc.fabric.api.registry.FuelValueEvents;
 
 import com.example.docs.ExampleMod;
 import com.example.docs.block.ModBlocks;
@@ -51,6 +49,10 @@ import com.example.docs.item.armor.GuiditeArmorMaterial;
 import com.example.docs.item.custom.CounterItem;
 import com.example.docs.item.custom.LightningStick;
 import com.example.docs.networking.basic.LightningTaterItem;
+
+import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
+import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
+import net.minecraft.world.level.storage.loot.providers.number.ResolvableNumber;
 
 // #region mod_items_class
 public class ModItems {
@@ -190,7 +192,19 @@ public class ModItems {
 	// #endregion poisonous_apple
 
 	// #region suspicious_substance
-	public static final Item SUSPICIOUS_SUBSTANCE = register(ModItemIds.SUSPICIOUS_SUBSTANCE, Item::new, new Item.Properties());
+	public static final Item SUSPICIOUS_SUBSTANCE = register(ModItemIds.SUSPICIOUS_SUBSTANCE, Item::new, new Item.Properties()
+			// #region compostable_item
+			// Add the suspicious substance to the composting registry with a 30% chance of increasing the composter's level.
+			.component(DataComponents.COMPOSTABLE, new Compostable(new ResolvableNumber.Constant(0.3f)))
+			// #endregion compostable_item
+			// #region fuel_item
+			// Add the suspicious substance to the registry of fuels, with a burn time of 30 seconds.
+			// Remember, Minecraft deals with logical based-time using ticks.
+			// 20 ticks = 1 second.
+			.component(DataComponents.COOKING_FUEL, new CookingFuel(new ResolvableNumber.Constant( 30 * 20), ResolvableNumber.fromKey(NumberProviders.COOKING_DEFAULT_SPEED_MULTIPLIER)))
+			// #endregion fuel_item
+
+		);
 	// #endregion suspicious_substance
 
 	// #region custom_entity_spawn_egg
@@ -206,7 +220,7 @@ public class ModItems {
 	// #region axe
 	public static final Item GUIDITE_AXE = register(
 					ModItemIds.GUIDITE_AXE,
-					settings -> new AxeItem(GUIDITE_TOOL_MATERIAL, 5.0F, -3.0F, settings),
+					settings -> new Item(settings.axe(GUIDITE_TOOL_MATERIAL, 5.0F, -3.0F)),
 					new Item.Properties());
 	// #endregion axe
 
@@ -222,7 +236,7 @@ public class ModItems {
 
 	public static final Item BALLOON = register(ModItemIds.BALLOON, Item::new, new Item.Properties());
 
-	public static final Item ENHANCED_HOE = register(ModItemIds.ENHANCED_HOE, settings -> new HoeItem(GUIDITE_TOOL_MATERIAL, -4.0F, 0.0F, settings), new Item.Properties());
+	public static final Item ENHANCED_HOE = register(ModItemIds.ENHANCED_HOE, Item::new, new Item.Properties().hoe(GUIDITE_TOOL_MATERIAL, -4.0F, 0.0F));
 
 	public static final Item DIMENSIONAL_CRYSTAL = register(ModItemIds.DIMENSIONAL_CRYSTAL, Item::new, new Item.Properties());
 
@@ -288,20 +302,6 @@ public class ModItems {
 			creativeTab.accept(ModItems.DIMENSIONAL_CRYSTAL);
 			creativeTab.accept(ModItems.THROWING_KNIVES);
 		});
-
-		// #region compostable_item
-		// Add the suspicious substance to the composting registry with a 30% chance of increasing the composter's level.
-		CompostableRegistry.INSTANCE.add(ModItems.SUSPICIOUS_SUBSTANCE, 0.3f);
-		// #endregion compostable_item
-
-		// #region fuel_item
-		// Add the suspicious substance to the registry of fuels, with a burn time of 30 seconds.
-		// Remember, Minecraft deals with logical based-time using ticks.
-		// 20 ticks = 1 second.
-		FuelValueEvents.BUILD.register((builder, context) -> {
-			builder.add(ModItems.SUSPICIOUS_SUBSTANCE, 30 * 20);
-		});
-		// #endregion fuel_item
 		// #region initialize
 	}
 	// #endregion initialize

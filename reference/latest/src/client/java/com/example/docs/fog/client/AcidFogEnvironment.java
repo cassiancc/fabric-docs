@@ -1,5 +1,7 @@
 package com.example.docs.fog.client;
 
+import net.minecraft.util.ARGB;
+
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.client.Camera;
@@ -11,6 +13,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.material.FogType;
 
 import com.example.docs.fog.ExampleModFogTypes;
+
+import org.joml.Vector3fc;
 
 // TODO: Fabric Fog API
 // #region environment
@@ -27,8 +31,8 @@ public class AcidFogEnvironment extends FogEnvironment {
 	}
 
 	@Override
-	public int getBaseColor(ClientLevel level, Camera camera, int viewDistance, float tickDelta) {
-		return 0x075800;
+	public Vector3fc getBaseColor(ClientLevel level, Camera camera, int viewDistance, float tickDelta) {
+		return ARGB.vector3fFromRGB24(0x075800);
 	}
 }
 // #endregion environment
