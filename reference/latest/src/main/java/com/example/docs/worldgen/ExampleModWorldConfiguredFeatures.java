@@ -3,6 +3,7 @@ package com.example.docs.worldgen;
 import java.util.List;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BlockStateProviders;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -74,15 +75,15 @@ public class ExampleModWorldConfiguredFeatures {
 		// #region datagen_world_tree_feature_config
 		TreeFeature diamondTree = new TreeFeature.Builder(
 				// Trunk / Logs
-				BlockStateProvider.simple(Blocks.DIAMOND_BLOCK),
+				BlockStateProvider.of(Blocks.DIAMOND_BLOCK),
 				new StraightTrunkPlacer(4, 2, 0),
 				// Leaves
-				BlockStateProvider.simple(Blocks.GOLD_BLOCK),
+				BlockStateProvider.of(Blocks.GOLD_BLOCK),
 				new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
 
 				new TwoLayersFeatureSize(0, 0, 0),
 				// Block underneath the tree
-				BlockStateProvider.simple(Blocks.DIRT)
+				context.lookup(Registries.BLOCK_STATE_PROVIDER).getOrThrow(BlockStateProviders.SOIL_BENEATH_TREE)
 				).build();
 		// #endregion datagen_world_tree_feature_config
 

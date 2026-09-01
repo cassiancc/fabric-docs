@@ -35,6 +35,9 @@ import net.minecraft.world.item.consume_effects.ApplyStatusEffectsConsumeEffect;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProviders;
+import net.minecraft.world.level.storage.loot.providers.number.floats.ResolvableFloat;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ResolvableInt;
 
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
@@ -49,10 +52,6 @@ import com.example.docs.item.armor.GuiditeArmorMaterial;
 import com.example.docs.item.custom.CounterItem;
 import com.example.docs.item.custom.LightningStick;
 import com.example.docs.networking.basic.LightningTaterItem;
-
-import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
-import net.minecraft.world.level.storage.loot.providers.number.NumberProviders;
-import net.minecraft.world.level.storage.loot.providers.number.ResolvableNumber;
 
 // #region mod_items_class
 public class ModItems {
@@ -195,13 +194,13 @@ public class ModItems {
 	public static final Item SUSPICIOUS_SUBSTANCE = register(ModItemIds.SUSPICIOUS_SUBSTANCE, Item::new, new Item.Properties()
 			// #region compostable_item
 			// Add the suspicious substance to the composting registry with a 30% chance of increasing the composter's level.
-			.component(DataComponents.COMPOSTABLE, new Compostable(new ResolvableNumber.Constant(0.3f)))
+			.component(DataComponents.COMPOSTABLE, new Compostable(new ResolvableInt.Constant(30)))
 			// #endregion compostable_item
 			// #region fuel_item
 			// Add the suspicious substance to the registry of fuels, with a burn time of 30 seconds.
 			// Remember, Minecraft deals with logical based-time using ticks.
 			// 20 ticks = 1 second.
-			.component(DataComponents.COOKING_FUEL, new CookingFuel(new ResolvableNumber.Constant( 30 * 20), ResolvableNumber.fromKey(NumberProviders.COOKING_DEFAULT_SPEED_MULTIPLIER)))
+			.component(DataComponents.COOKING_FUEL, new CookingFuel(new ResolvableInt.Constant( 30 * 20), ResolvableFloat.fromKey(ContextFloatProviders.COOKING_DEFAULT_SPEED_MULTIPLIER)))
 			// #endregion fuel_item
 
 		);

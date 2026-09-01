@@ -1,20 +1,18 @@
 package com.example.docs.fog.client;
 
-import net.minecraft.util.ARGB;
-
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3fc;
 
 import net.minecraft.client.Camera;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.fog.FogData;
 import net.minecraft.client.renderer.fog.environment.FogEnvironment;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.material.FogType;
 
 import com.example.docs.fog.ExampleModFogTypes;
-
-import org.joml.Vector3fc;
 
 // TODO: Fabric Fog API
 // #region environment

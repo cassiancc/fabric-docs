@@ -1,11 +1,11 @@
 package com.example.docs.datagen;
 
-import com.example.docs.potion.ExampleModPotions;
-
 import net.minecraft.data.recipes.BrewingProvider;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
+
+import com.example.docs.potion.ExampleModPotions;
 
 public class ExampleModBrewingProvider extends BrewingProvider {
 	protected ExampleModBrewingProvider(RecipeOutput output) {

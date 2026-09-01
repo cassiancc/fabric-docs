@@ -1,6 +1,5 @@
 package com.example.docs.block.custom;
 
-import com.mojang.serialization.MapCodec;
 import org.jspecify.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
