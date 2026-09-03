@@ -152,7 +152,6 @@ These models can be data generated. For more information, see the documentation 
 
 <DownloadEntry visualURL="/assets/develop/items/guidite_shield_base_nopattern_hd.png" downloadURL="/assets/develop/items/guidite_shield_base_nopattern.png">Guidite Shield Base (No Banner Patterns) Texture</DownloadEntry>
 
-
 ::::
 
 ## Creating the Recipes {#recipes}
