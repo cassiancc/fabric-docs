@@ -181,7 +181,7 @@ For more information, see the documentation on generating [item tags](../data-ge
 
 :::
 
-It's also recommended to place your shield in the appropriate item tags. For a shield, that would be usually be `ItemTags.DURABILITY_ENCHANTABLE` to allow it to be enchanted with Mending and Unbreaking, and `ConventionalItemTags.SHIELD_TOOLS`, which modders will be using to look for shields.
+It's also recommended to place your shield in the appropriate item tags. For a shield, that would be usually be `ItemTags.DURABILITY_ENCHANTABLE` to allow it to be enchanted with Mending and Unbreaking, and `ConventionalItemTags.SHIELD_TOOLS`, which modders can use for shield-specific behaviour like custom shield enchantments.
 
 In your item tag provider, add the following lines to `addTags`:
 
@@ -189,4 +189,4 @@ In your item tag provider, add the following lines to `addTags`:
 
 That's pretty much it! If you go in-game you should see your shield in the "Combat" tab of the creative inventory menu.
 
-![Finished tools in inventory](/assets/develop/items/shield_use.png)
+![Finished shield in-game](/assets/develop/items/shield_use.png)
