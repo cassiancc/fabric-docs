@@ -73,7 +73,7 @@ Next, we'll make a `RuleTest` inside the `configure` method that controls which 
 
 <<< @/reference/latest/src/main/java/com/example/docs/worldgen/ExampleModWorldFeatures.java#datagen_world_ruletest
 
-Next, also inside the `configure` method, we need to create the `OreConfiguration`, which tells the game what to replace blocks with.
+Next, also inside the `configure` method, we need to create the `BlockReplacement`, which tells the game what to replace blocks with.
 
 <<< @/reference/latest/src/main/java/com/example/docs/worldgen/ExampleModWorldFeatures.java#datagen_world_ore_feature_config
 
@@ -87,7 +87,7 @@ Lastly, we need to register our feature to our game inside the `configure` metho
 
 ### Trees {#trees}
 
-To make a custom tree, you need to first create a `TreeConfiguration` inside the `configure` method:
+To make a custom tree, you need to first create a `TreeFeature` inside the `configure` method:
 
 <<< @/reference/latest/src/main/java/com/example/docs/worldgen/ExampleModWorldFeatures.java#datagen_world_tree_feature_config
 
