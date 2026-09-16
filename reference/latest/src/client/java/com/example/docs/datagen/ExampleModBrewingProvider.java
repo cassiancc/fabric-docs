@@ -21,19 +21,24 @@ public class ExampleModBrewingProvider extends FabricRecipeProvider {
 		super(output, registriesFuture);
 	}
 
+	// #region register_recipes
 	@Override
 	protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
 		return new RecipeProvider(recipes, advancements) {
-			// #region register_recipes
 			@Override
 			public void buildRecipes() {
 				BrewingProvider brewingProvider = new BrewingProvider(output) {
 					@Override
 					protected void addContainers() {
+						addContainer(Items.LINGERING_POTION);
+						addContainer(Items.POTION);
+						addContainer(Items.SPLASH_POTION);
 					}
 
 					@Override
 					protected void addContainerTransformations() {
+						addContainerTransformation(Items.POTION, Items.GUNPOWDER, Items.SPLASH_POTION);
+						addContainerTransformation(Items.SPLASH_POTION, Items.DRAGON_BREATH, Items.LINGERING_POTION);
 					}
 
 					@Override
@@ -50,7 +55,7 @@ public class ExampleModBrewingProvider extends FabricRecipeProvider {
 				};
 				brewingProvider.buildRecipes();
 			}
-			// #endregion register_recipes
 		};
 	}
+	// #endregion register_recipes
 }
