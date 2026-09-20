@@ -62,16 +62,13 @@ This guide references data generation for [recipes](../data-generation/recipes).
 
 :::
 
-In a recipe provider's `buildRecipes` method, we will create a new `BrewingProvider` and call `BrewingPrvoider#buildRecipes` to generate a new potion recipe. This can also be done by hand.
+In a recipe provider's `buildRecipes` method, we will create a new `FabricBrewingProvider` and call `FabricBrewingProvider#buildRecipes` to generate a new potion recipe. This can also be done without datagen, but potions require a large number of JSON files, so datagen is recommended as always.
 
-`BrewingProvider` provides three methods that must be filled in.
+`FabricBrewingProvider` provides the `buildMixes` method which handles the actual crafting recipes. You'll call `buildMix` with 3 parameters:
 
-- `addContainers` specifies every container your potion fits in. This potion should fit in all three vanilla potion containers: standard, lingering, and splash.
-- `addContainerTransformations` specifies how other containers are created. This should be the same as vanilla.
-- `buildMixes` handles the actual crafting recipes. You'll call `buildMix` with 3 parameters:
-  - `Holder<Potion> input` - The starting potion, represented by a holder. Usually this can be a Water Bottle or an Awkward Potion.
-  - `Item reagent` - The item which is the main ingredient of the potion.
-  - `Holder<Potion> output` - The resultant potion, represented by a holder.
+- `Holder<Potion> input` - The starting potion, represented by a holder. Usually this can be a Water Bottle or an Awkward Potion.
+- `Item reagent` - The item which is the main ingredient of the potion.
+- `Holder<Potion> output` - The resultant potion, represented by a holder.
 
 <<< @/reference/latest/src/client/java/com/example/docs/datagen/ExampleModBrewingProvider.java#register_recipes
 

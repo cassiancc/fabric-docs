@@ -4,7 +4,6 @@ import java.util.concurrent.CompletableFuture;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.recipes.BrewingProvider;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.item.Items;
@@ -12,6 +11,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Recipe;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBrewingProvider;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 
 import com.example.docs.potion.ExampleModPotions;
@@ -27,20 +27,7 @@ public class ExampleModBrewingProvider extends FabricRecipeProvider {
 		return new RecipeProvider(recipes, advancements) {
 			@Override
 			public void buildRecipes() {
-				BrewingProvider brewingProvider = new BrewingProvider(output) {
-					@Override
-					protected void addContainers() {
-						addContainer(Items.LINGERING_POTION);
-						addContainer(Items.POTION);
-						addContainer(Items.SPLASH_POTION);
-					}
-
-					@Override
-					protected void addContainerTransformations() {
-						addContainerTransformation(Items.POTION, Items.GUNPOWDER, Items.SPLASH_POTION);
-						addContainerTransformation(Items.SPLASH_POTION, Items.DRAGON_BREATH, Items.LINGERING_POTION);
-					}
-
+				FabricBrewingProvider brewingProvider = new FabricBrewingProvider(output) {
 					@Override
 					protected void buildMixes() {
 						buildMix(
