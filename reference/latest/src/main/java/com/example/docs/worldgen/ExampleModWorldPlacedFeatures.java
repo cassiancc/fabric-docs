@@ -41,7 +41,7 @@ public class ExampleModWorldPlacedFeatures {
 	public static void configure(BootstrapContext<PlacedFeature> context) {
 		// #endregion datagen_world_placed_features_class
 		// #region datagen_world_conf_feature_register
-		HolderGetter<Feature> configuredFeatures = context.lookup(Registries.FEATURE);
+		HolderGetter<Feature> features = context.lookup(Registries.FEATURE);
 		// #endregion datagen_world_conf_feature_register
 
 		// #region datagen_world_placement_modifiers
