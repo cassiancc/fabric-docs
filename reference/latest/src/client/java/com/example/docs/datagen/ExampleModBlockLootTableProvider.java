@@ -32,7 +32,7 @@ public class ExampleModBlockLootTableProvider extends FabricBlockLootSubProvider
 		dropWhenSilkTouch(ModBlocks.PRISMARINE_LAMP);
 		// Make condensed oak logs drop between 7 and 9 oak logs
 		add(ModBlocks.CONDENSED_OAK_LOG, LootTable.lootTable().withPool(applyExplosionCondition(Items.OAK_LOG, LootPool.lootPool()
-				.setRolls(ContextIntProviders.avg(ContextIntProviders.exactly(7), ContextIntProviders.exactly(9)))
+				.setRolls(ContextIntProviders.between(ContextIntProviders.exactly(7), ContextIntProviders.exactly(9)))
 				.add(LootItem.lootTableItem(Items.OAK_LOG))))
 		);
 		// #endregion datagen_loot_tables_block_drops
