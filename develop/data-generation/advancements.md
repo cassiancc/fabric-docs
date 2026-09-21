@@ -44,6 +44,12 @@ An advancement is made up a few different components. Along with the requirement
 
 Here's a simple advancement for getting a dirt block:
 
+::: tip
+
+This is a root advancement, so we use `rootDisplay` to set the background of the advancement. Advancements with parents use `display`.
+
+:::
+
 <<< @/reference/latest/src/client/java/com/example/docs/datagen/ExampleModAdvancementProvider.java#datagen_advancements_simple_advancement
 
 ::: details JSON Output
