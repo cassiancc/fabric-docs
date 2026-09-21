@@ -65,7 +65,7 @@ public class ExampleModWorldPlacedFeatures {
 		context.register(
 				DIAMOND_BLOCK_ORE_PLACED_KEY,
 				new PlacedFeature(
-					configuredFeatures.getOrThrow(ExampleModWorldFeatures.DIAMOND_BLOCK_VEIN_CONFIGURED_KEY),
+					features.getOrThrow(ExampleModWorldFeatures.DIAMOND_BLOCK_VEIN_FEATURE_KEY),
 					diamondBlockVeinModifiers
 				)
 		);
@@ -74,7 +74,7 @@ public class ExampleModWorldPlacedFeatures {
 		context.register(
 				DIAMOND_TREE_PLACED_KEY,
 				new PlacedFeature(
-					configuredFeatures.getOrThrow(ExampleModWorldFeatures.DIAMOND_TREE_CONFIGURED_KEY),
+					features.getOrThrow(ExampleModWorldFeatures.DIAMOND_TREE_FEATURE_KEY),
 					diamondTreeModifiers
 				)
 		);
