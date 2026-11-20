@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.example.docs.mixin.client",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "ExampleClientMixin",
+    "GameRendererMixin",
+    "LevelRendererMixin",
+    "TitleScreenMixin",
+    "accessor.HudAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -60,9 +60,9 @@
   ],
   "depends": {
     "fabricloader": ">=0.19.0",
-    "minecraft": "26.3",
+    "minecraft": "26.4-snapshot-10",
     "java": ">=25",
-    "fabric-api": "0.166.2+26.3"
+    "fabric-api": "0.166.4+26.4"
   },
   "accessWidener": "example-mod.classtweaker"
 }

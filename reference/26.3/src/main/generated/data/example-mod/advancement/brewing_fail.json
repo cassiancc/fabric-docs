@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:nether/brew_potion",
+  "criteria": {
+    "brew_mundane": {
+      "conditions": {
+        "potion": {
+          "potions": "minecraft:mundane"
+        }
+      },
+      "trigger": "minecraft:brewed_potion"
+    },
+    "brew_thick": {
+      "conditions": {
+        "potion": {
+          "potions": "minecraft:thick"
+        }
+      },
+      "trigger": "minecraft:brewed_potion"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": "Brew a useless potion",
+    "icon": {
+      "id": "minecraft:potion"
+    },
+    "title": "Brewing Fail"
+  },
+  "requirements": [
+    [
+      "brew_mundane",
+      "brew_thick"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
