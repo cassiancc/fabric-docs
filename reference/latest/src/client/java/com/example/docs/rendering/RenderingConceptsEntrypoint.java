@@ -23,7 +23,7 @@ public class RenderingConceptsEntrypoint implements ClientModInitializer {
 
 	// #region hud_layer
 	private HudElement hudLayer() {
-		return (graphics, deltaTracker) -> {
+		return (graphics) -> {
 			// #endregion hud_layer
 
 			if (false) {
@@ -35,7 +35,7 @@ public class RenderingConceptsEntrypoint implements ClientModInitializer {
 			Matrix3x2fStack matrices = graphics.pose();
 
 			// Store the total tick delta in a field, so we can use it later.
-			this.totalTickProgress += deltaTracker.getGameTimeDeltaPartialTick(true);
+			this.totalTickProgress += graphics.deltaTracker().getGameTimeDeltaPartialTick(true);
 
 			// Push a new matrix onto the stack.
 			matrices.pushMatrix();

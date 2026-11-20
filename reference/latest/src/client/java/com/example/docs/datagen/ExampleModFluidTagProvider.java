@@ -9,7 +9,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 
 import com.example.docs.fluid.ModFluidIds;
-import com.example.docs.fluid.ModFluidTags;
 
 public class ExampleModFluidTagProvider extends FabricTagsProvider.FluidTagsProvider {
 	public ExampleModFluidTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
@@ -18,7 +17,6 @@ public class ExampleModFluidTagProvider extends FabricTagsProvider.FluidTagsProv
 
 	@Override
 	protected void addTags(HolderLookup.Provider wrapperLookup) {
-		builder(ModFluidTags.ACID).add(ModFluidIds.ACID_STILL, ModFluidIds.ACID_FLOWING);
-		builder(FluidTags.WATER).addTag(ModFluidTags.ACID);
+		builder(FluidTags.WATER).add(ModFluidIds.ACID);
 	}
 }

@@ -3,7 +3,7 @@ package com.example.docs.block.entity.custom;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
@@ -11,7 +11,6 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -68,7 +67,7 @@ public class EngineBlockEntity extends BlockEntity implements DynamicSoundSource
 
 	@Override
 	public float getNormalizedStress() {
-		return Mth.clamp(this.normalizedStress, 0, 1);
+		return Math.clamp(this.normalizedStress, 0, 1);
 	}
 
 	public void setNormalizedStress(float normalizedStress) {
@@ -76,12 +75,12 @@ public class EngineBlockEntity extends BlockEntity implements DynamicSoundSource
 	}
 
 	public int getFuel() {
-		return Mth.clamp(this.fuel, 0, MAX_FUEL);
+		return Math.clamp(this.fuel, 0, MAX_FUEL);
 	}
 
 	public boolean setFuelIfPossible(int fuel) {
 		boolean consumeItem = this.getFuel() != MAX_FUEL;
-		this.fuel = Mth.clamp(fuel, 0, MAX_FUEL);
+		this.fuel = Math.clamp(fuel, 0, MAX_FUEL);
 		return consumeItem;
 	}
 
@@ -127,7 +126,7 @@ public class EngineBlockEntity extends BlockEntity implements DynamicSoundSource
 	}
 
 	@Override
-	public CompoundTag getUpdateTag(HolderLookup.Provider registryLookup) {
+	public CompoundTag getUpdateTag(HolderGetter.Provider registryLookup) {
 		return saveWithoutMetadata(registryLookup);
 	}
 }

@@ -49,7 +49,7 @@ public class ExampleModWorldPlacedFeatures {
 				CountPlacement.of(6),
 				BiomeFilter.biome(),
 				InSquarePlacement.spread(),
-				HeightRangePlacement.of(BiasedToBottomHeight.of(VerticalAnchor.BOTTOM, VerticalAnchor.absolute(0), 3))
+				HeightRangePlacement.of(BiasedToBottomHeight.of(VerticalAnchor.bottom(), VerticalAnchor.absolute(0), 3))
 		);
 		// #endregion datagen_world_placement_modifiers
 

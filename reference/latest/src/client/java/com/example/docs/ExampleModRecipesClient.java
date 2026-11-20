@@ -1,6 +1,7 @@
 package com.example.docs;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.core.registries.BuiltInClientRegistries;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.multiplayer.ClientLevel;
 
@@ -10,11 +11,13 @@ import com.example.docs.menu.ModMenuTypes;
 import com.example.docs.recipe.ExampleModRecipes;
 import com.example.docs.rendering.screens.inventory.UpgradingScreen;
 
+import net.minecraft.core.WritableRegistry;
+
 public class ExampleModRecipesClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		// #region register_with_menu
-		MenuScreens.register(ModMenuTypes.UPGRADING_MENU_TYPE, UpgradingScreen::new);
+		MenuScreens.register((WritableRegistry<MenuScreens.ScreenConstructor<?,?>>) BuiltInClientRegistries.MENU_SCREEN, ModMenuTypes.UPGRADING_MENU_TYPE, UpgradingScreen::new);
 		// #endregion register_with_menu
 	}
 

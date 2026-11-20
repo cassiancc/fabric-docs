@@ -44,8 +44,8 @@ public class UpgradingMenu extends AbstractContainerMenu {
 
 		this.access = access;
 
-		addSlot(new Slot(this.input, 0, 27, 47));
-		addSlot(new Slot(this.input, 1, 76, 47));
+		addSlot(new Slot(this.input, 0, 27, 47, Slot.Section.INPUT));
+		addSlot(new Slot(this.input, 1, 76, 47, Slot.Section.SECOND_INPUT));
 
 		addSlot(new UpgradingResultSlot(this, this.output, 0, 134, 47));
 

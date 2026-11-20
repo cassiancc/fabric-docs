@@ -26,7 +26,7 @@ public class ExampleModClientCommands implements ClientModInitializer {
 
 		ClientCommandRegistrationCallback.EVENT.register((dispatcher, _) -> dispatcher.register(ClientCommands.literal("magic_skills_screen").executes(context -> {
 			Minecraft instance = Minecraft.getInstance();
-			instance.execute(() -> instance.gui.setScreen(new ExampleModMagicSkillsScreen(instance, context.getSource().registryAccess())));
+			instance.execute(() -> instance.gui.setScreen(new ExampleModMagicSkillsScreen(instance, context.getSource().getLevel().registryAccess())));
 			return Command.SINGLE_SUCCESS;
 		})));
 	}

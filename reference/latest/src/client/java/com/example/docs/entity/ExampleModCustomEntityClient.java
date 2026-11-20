@@ -1,5 +1,6 @@
 package com.example.docs.entity;
 
+import net.minecraft.client.core.registries.BuiltInClientRegistries;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 
 import net.fabricmc.api.ClientModInitializer;
@@ -14,7 +15,7 @@ public class ExampleModCustomEntityClient implements ClientModInitializer {
 		ModEntityModelLayers.registerModelLayers();
 		// #endregion register_client
 		// #region register_renderer
-		EntityRenderers.register(ModEntityTypes.MINI_GOLEM, MiniGolemEntityRenderer::new);
+		EntityRenderers.register(BuiltInClientRegistries.ENTITY_RENDERER, ModEntityTypes.MINI_GOLEM, MiniGolemEntityRenderer::new);
 		// #endregion register_renderer
 		// #region register_client
 	}

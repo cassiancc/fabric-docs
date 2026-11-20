@@ -6,9 +6,8 @@ import java.time.MonthDay;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import org.jspecify.annotations.Nullable;
 
-import net.minecraft.resources.RegistryOps;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.SpecialDates;
 
@@ -46,7 +45,7 @@ public record DateMatchesResourceCondition(int month, int day) implements Resour
 
 	// #region test
 	@Override
-	public boolean test(RegistryOps.@Nullable RegistryInfoLookup registryInfo) {
+	public boolean test(HolderGetter.Provider registryInfo) {
 		MonthDay monthDay = MonthDay.of(this.month, this.day);
 		return SpecialDates.dayNow().equals(monthDay);
 	}

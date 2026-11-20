@@ -282,7 +282,7 @@ public class ModItems {
 	public static final Item MINI_GOLEM_SPAWN_EGG = register(
 			ModItemIds.MINI_GOLEM_SPAWN_EGG,
 			SpawnEggItem::new,
-			new Item.Properties().spawnEgg(ModEntityTypes.MINI_GOLEM)
+			new Item.Properties().spawns(ModEntityTypes.MINI_GOLEM)
 	);
 	// #endregion custom_entity_spawn_egg
 
@@ -423,7 +423,7 @@ public class ModItems {
 	// #region acid_bucket
 	public static final Item ACID_BUCKET = register(
 			ModItemIds.ACID_BUCKET,
-			props -> new BucketItem(ModFluids.ACID_STILL, props),
+			props -> new BucketItem(ModFluids.ACID, props),
 			new Item.Properties()
 					.craftRemainder(Items.BUCKET)
 					.stacksTo(1)

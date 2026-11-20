@@ -8,8 +8,7 @@ import com.example.docs.ExampleMod;
 
 // #region register
 public class ModFluidIds {
-	public static final ResourceKey<Fluid> ACID_FLOWING = create("flowing_acid");
-	public static final ResourceKey<Fluid> ACID_STILL = create("acid");
+	public static final ResourceKey<Fluid> ACID = create("acid");
 
 	public static ResourceKey<Fluid> create(String name) {
 		// Create the fluid key.

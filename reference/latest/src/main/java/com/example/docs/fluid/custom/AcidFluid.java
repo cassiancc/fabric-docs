@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -28,49 +29,35 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 
 import com.example.docs.block.ModBlocks;
-import com.example.docs.fluid.ModFluidTags;
 import com.example.docs.fluid.ModFluids;
-import com.example.docs.item.ModItems;
+import com.example.docs.item.ModItemIds;
 
 // #region abstract_fluid
-public abstract class AcidFluid extends FlowingFluid {
+public class AcidFluid extends FlowingFluid {
+	public AcidFluid(Properties properties) {
+		super(properties);
+	}
 	// #endregion abstract_fluid
 
 	// #region sources
-	@Override
-	public Fluid getFlowing() {
-		return ModFluids.ACID_FLOWING;
-	}
-
-	@Override
-	public Fluid getSource() {
-		return ModFluids.ACID_STILL;
-	}
-
-	@Override
-	public boolean isSame(Fluid fluid) {
-		return fluid == ModFluids.ACID_STILL || fluid == ModFluids.ACID_FLOWING;
-	}
 
 	// #endregion sources
 	// #region bucket
 	@Override
-	public Item getBucket() {
-		return ModItems.ACID_BUCKET;
+	public ResourceKey<Item> getBucket() {
+		return ModItemIds.ACID_BUCKET;
 	}
 
 	// #endregion bucket
 	// #region abstract_fluid
 	@Override
 	public void animateTick(Level world, BlockPos pos, FluidState state, RandomSource random) {
-		if (!state.isSource() && !(Boolean) state.getValue(FALLING)) {
+		if (!state.isSource() && !(Boolean) state.isFalling()) {
 			if (random.nextInt(64) == 0) {
 				world.playLocalSound(
 						pos.getX() + 0.5,
@@ -144,9 +131,8 @@ public abstract class AcidFluid extends FlowingFluid {
 	}
 
 	@Override
-	public boolean canBeReplacedWith(FluidState state, BlockGetter world, BlockPos pos, Fluid fluid,
-			Direction direction) {
-		return direction == Direction.DOWN && !fluid.is(ModFluidTags.ACID);
+	protected boolean canBeReplacedWith(FluidState state, BlockGetter level, BlockPos pos, FluidState other, Direction direction) {
+		return direction == Direction.DOWN && !other.is(ModFluids.ACID);
 	}
 
 	@Override
@@ -159,37 +145,6 @@ public abstract class AcidFluid extends FlowingFluid {
 		return Optional.of(SoundEvents.BUCKET_FILL);
 	}
 	// #endregion abstract_fluid
-	// #region fluid_subclasses
-	public static class Flowing extends AcidFluid {
-		@Override
-		protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
-			super.createFluidStateDefinition(builder);
-			builder.add(LEVEL);
-		}
-
-		@Override
-		public int getAmount(FluidState state) {
-			return state.getValue(LEVEL);
-		}
-
-		@Override
-		public boolean isSource(FluidState state) {
-			return false;
-		}
-	}
-
-	public static class Source extends AcidFluid {
-		@Override
-		public int getAmount(FluidState state) {
-			return 8;
-		}
-
-		@Override
-		public boolean isSource(FluidState state) {
-			return true;
-		}
-	}
-	// #endregion fluid_subclasses
 	// #region abstract_fluid
 }
 // #endregion abstract_fluid

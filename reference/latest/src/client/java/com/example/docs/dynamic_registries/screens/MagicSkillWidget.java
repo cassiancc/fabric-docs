@@ -20,7 +20,7 @@ public class MagicSkillWidget extends AbstractWidget {
 	}
 
 	@Override
-	protected void extractWidgetRenderState(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+	protected void extractWidgetRenderState(@NonNull GuiGraphicsExtractor graphics) {
 		graphics.text(this.font, this.skill.name(), this.getX(), this.getY(), 0xFFFFFFFF, true);
 		graphics.text(this.font, "Mana : %d".formatted(this.skill.manaCost()), this.getX(), this.getY() + this.font.lineHeight, 0xFFFFFFFF, true);
 	}

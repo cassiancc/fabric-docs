@@ -1,26 +1,26 @@
 package com.example.docs.command;
 
 import com.mojang.brigadier.Command;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.tree.CommandNode;
 
+import net.minecraft.commands.CommandPermissionLevels;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.IntegerArgument;
 import net.minecraft.commands.arguments.ResourceArgument;
-import net.minecraft.commands.synchronization.SingletonArgumentInfo;
-import net.minecraft.commands.synchronization.SuggestionProviders;
+import net.minecraft.commands.arguments.StringArgument;
+import net.minecraft.commands.suggestions.SuggestSummonableEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.permissions.Permissions;
 import net.minecraft.world.entity.EntityType;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
 import com.example.docs.ExampleMod;
@@ -69,7 +69,7 @@ public class ExampleModCommands implements ModInitializer {
 
 	// #region execute_command_with_arg
 	private static int executeCommandWithArg(CommandContext<CommandSourceStack> context) {
-		int value = IntegerArgumentType.getInteger(context, "value");
+		int value = IntegerArgument.getInteger(context, "value");
 		context.getSource().sendSuccess(() -> Component.literal("Called /command_with_arg with value = %s".formatted(value)), false);
 		return Command.SINGLE_SUCCESS;
 	}
@@ -77,14 +77,14 @@ public class ExampleModCommands implements ModInitializer {
 
 	// #region execute_command_with_two_args
 	private static int executeWithOneArg(CommandContext<CommandSourceStack> context) {
-		int value1 = IntegerArgumentType.getInteger(context, "value_one");
+		int value1 = IntegerArgument.getInteger(context, "value_one");
 		context.getSource().sendSuccess(() -> Component.literal("Called /command_with_two_args with value one = %s".formatted(value1)), false);
 		return Command.SINGLE_SUCCESS;
 	}
 
 	private static int executeWithTwoArgs(CommandContext<CommandSourceStack> context) {
-		int value1 = IntegerArgumentType.getInteger(context, "value_one");
-		int value2 = IntegerArgumentType.getInteger(context, "value_two");
+		int value1 = IntegerArgument.getInteger(context, "value_one");
+		int value2 = IntegerArgument.getInteger(context, "value_two");
 		context.getSource().sendSuccess(() -> Component.literal("Called /argtater2 with value one = %s and value two = %s".formatted(value1, value2)),
 				false);
 		return Command.SINGLE_SUCCESS;
@@ -116,7 +116,7 @@ public class ExampleModCommands implements ModInitializer {
 
 	// #region execute_command_with_custom_suggestions
 	private static int executeCommandWithCustomSuggestions(CommandContext<CommandSourceStack> context) {
-		String name = StringArgumentType.getString(context, "player_name");
+		String name = StringArgument.getString(context, "player_name");
 		context.getSource().sendSuccess(() -> Component.literal("Called /command_with_custom_suggestions with value = %s".formatted(name)), false);
 		return Command.SINGLE_SUCCESS;
 	}
@@ -125,10 +125,9 @@ public class ExampleModCommands implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		// #region register_custom_arg
-		ArgumentTypeRegistry.registerArgumentType(
+		Registry.register(BuiltInRegistries.COMMAND_ARGUMENT_TYPE,
 				ExampleMod.id("block_pos"),
-				BlockPosArgumentType.class,
-				SingletonArgumentInfo.contextFree(BlockPosArgumentType::new)
+				BlockPosArgument.TYPE
 		);
 		// #endregion register_custom_arg
 
@@ -153,7 +152,7 @@ public class ExampleModCommands implements ModInitializer {
 		// #region required_command
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			dispatcher.register(Commands.literal("required_command")
-					.requires(source -> source.permissions().hasPermission(Permissions.COMMANDS_MODERATOR))
+					.requires(Commands.hasPermission(CommandPermissionLevels.LEVEL_MODERATORS))
 					.executes(ExampleModCommands::executeRequiredCommand));
 		});
 		// #endregion required_command
@@ -183,7 +182,7 @@ public class ExampleModCommands implements ModInitializer {
 		// #region command_with_arg
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			dispatcher.register(Commands.literal("command_with_arg")
-					.then(Commands.argument("value", IntegerArgumentType.integer())
+					.then(Commands.argument("value", IntegerArgument.integer())
 							.executes(ExampleModCommands::executeCommandWithArg)));
 		});
 		// #endregion command_with_arg
@@ -191,9 +190,9 @@ public class ExampleModCommands implements ModInitializer {
 		// #region command_with_two_args
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			dispatcher.register(Commands.literal("command_with_two_args")
-					.then(Commands.argument("value_one", IntegerArgumentType.integer())
+					.then(Commands.argument("value_one", IntegerArgument.integer())
 							.executes(ExampleModCommands::executeWithOneArg)
-							.then(Commands.argument("value_two", IntegerArgumentType.integer())
+							.then(Commands.argument("value_two", IntegerArgument.integer())
 									.executes(ExampleModCommands::executeWithTwoArgs))));
 		});
 		// #endregion command_with_two_args
@@ -201,12 +200,12 @@ public class ExampleModCommands implements ModInitializer {
 		// #region command_with_common_exec
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			dispatcher.register(Commands.literal("command_with_common_exec")
-					.then(Commands.argument("value_one", IntegerArgumentType.integer())
-							.executes(context -> executeCommon(IntegerArgumentType.getInteger(context, "value_one"), 0, context))
-							.then(Commands.argument("value_two", IntegerArgumentType.integer())
+					.then(Commands.argument("value_one", IntegerArgument.integer())
+							.executes(context -> executeCommon(IntegerArgument.getInteger(context, "value_one"), 0, context))
+							.then(Commands.argument("value_two", IntegerArgument.integer())
 									.executes(context -> executeCommon(
-											IntegerArgumentType.getInteger(context, "value_one"),
-											IntegerArgumentType.getInteger(context, "value_two"),
+											IntegerArgument.getInteger(context, "value_one"),
+											IntegerArgument.getInteger(context, "value_two"),
 											context)))));
 		});
 		// #endregion command_with_common_exec
@@ -214,7 +213,7 @@ public class ExampleModCommands implements ModInitializer {
 		// #region custom_arg_command
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			dispatcher.register(Commands.literal("command_with_custom_arg").then(
-					Commands.argument("block_pos", new BlockPosArgumentType())
+					Commands.argument("block_pos", BlockPosArgument.blockPos())
 							.executes(ExampleModCommands::executeCustomArgCommand)
 			));
 		});
@@ -223,8 +222,8 @@ public class ExampleModCommands implements ModInitializer {
 		// #region command_with_suggestions
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			dispatcher.register(Commands.literal("command_with_suggestions").then(
-					Commands.argument("entity", ResourceArgument.resource(registryAccess, Registries.ENTITY_TYPE))
-							.suggests(SuggestionProviders.cast(SuggestionProviders.SUMMONABLE_ENTITIES))
+					Commands.argument("entity", ResourceArgument.resource(Registries.ENTITY_TYPE))
+							.suggests(SuggestSummonableEntities.suggestSummonableEntities())
 							.executes(ExampleModCommands::executeCommandWithSuggestions)
 			));
 		});
@@ -233,8 +232,8 @@ public class ExampleModCommands implements ModInitializer {
 		// #region command_with_custom_suggestions
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			dispatcher.register(Commands.literal("command_with_custom_suggestions").then(
-					Commands.argument("player_name", StringArgumentType.string())
-							.suggests(new PlayerSuggestionProvider())
+					Commands.argument("player_name", StringArgument.string())
+							.suggests(PlayerSuggestionProvider.PLAYER_SUGGESTIONS)
 							.executes(ExampleModCommands::executeCommandWithCustomSuggestions)
 			));
 		});

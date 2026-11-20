@@ -1,8 +1,8 @@
 package com.example.docs.rendering;
 
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiPipeline;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 
@@ -14,8 +14,8 @@ public class DrawContextExampleScreen extends Screen {
 	}
 
 	@Override
-	public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
-		super.extractRenderState(graphics, mouseX, mouseY, delta);
+	public void extractRenderState(GuiGraphicsExtractor graphics) {
+		super.extractRenderState(graphics);
 
 		// #region draw_rectangle
 		int rectangleX = 10;
@@ -60,14 +60,14 @@ public class DrawContextExampleScreen extends Screen {
 		// #region draw_entire_texture
 		Identifier texture = Identifier.withDefaultNamespace("textures/block/deepslate.png");
 		// renderLayer, texture, x, y, u, v, width, height, textureWidth, textureHeight
-		graphics.blit(RenderPipelines.GUI_TEXTURED, texture, 90, 90, 0, 0, 16, 16, 16, 16);
+		graphics.blit(GuiPipeline.TEXTURED, texture, 90, 90, 0, 0, 16, 16, 16, 16);
 		// #endregion draw_entire_texture
 
 		// #region draw_portion_of_texture
 		Identifier texture2 = ExampleMod.id("textures/gui/test-uv-drawing.png");
 		int u = 10, v = 13, regionWidth = 14, regionHeight = 14;
 		// renderLayer, texture, x, y, u, v, width, height, regionWidth, regionHeight, textureWidth, textureHeight
-		graphics.blit(RenderPipelines.GUI_TEXTURED, texture2, 90, 190, u, v, 14, 14, regionWidth, regionHeight, 256, 256);
+		graphics.blit(GuiPipeline.TEXTURED, texture2, 90, 190, u, v, 14, 14, regionWidth, regionHeight, 256, 256);
 		// #endregion draw_portion_of_texture
 
 		// #region draw_text

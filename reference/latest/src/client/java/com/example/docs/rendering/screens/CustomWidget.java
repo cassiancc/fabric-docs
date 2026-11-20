@@ -12,7 +12,7 @@ public class CustomWidget extends AbstractWidget {
 	}
 
 	@Override
-	protected void extractWidgetRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
+	protected void extractWidgetRenderState(GuiGraphicsExtractor graphics) {
 		// We'll just draw a simple rectangle for now.
 		// x1, y1, x2, y2, startColor, endColor
 		int startColor = 0xFF00FF00; // Green

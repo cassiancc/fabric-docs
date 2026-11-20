@@ -10,7 +10,7 @@ public class UpgradingResultSlot extends Slot {
 	private final UpgradingMenu menu;
 
 	public UpgradingResultSlot(UpgradingMenu menu, Container container, int slot, int x, int y) {
-		super(container, slot, x, y);
+		super(container, slot, x, y, Section.RESULT);
 		this.menu = menu;
 	}
 

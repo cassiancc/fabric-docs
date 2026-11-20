@@ -1,9 +1,12 @@
 package com.example.docs;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.core.registries.BuiltInClientRegistries;
 import net.minecraft.client.model.object.equipment.ShieldModel;
 import net.minecraft.client.particle.EndRodParticle;
 import net.minecraft.client.renderer.special.SpecialModelRenderers;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 
 import net.fabricmc.api.ClientModInitializer;
@@ -35,7 +38,7 @@ public class ExampleModClient implements ClientModInitializer {
 		});
 		// #endregion tooltip_provider_client
 		// #region shield_layer
-		SpecialModelRenderers.ID_MAPPER.put(ExampleMod.id("guidite_shield"), GuiditeShieldSpecialRenderer.Unbaked.MAP_CODEC);
+		Registry.register(BuiltInClientRegistries.SPECIAL_MODEL_RENDERER_TYPE, ExampleMod.id("guidite_shield"), GuiditeShieldSpecialRenderer.Unbaked.MAP_CODEC);
 		ModelLayerRegistry.registerModelLayer(GuiditeShieldLayers.GUIDITE_SHIELD, ShieldModel::createLayer);
 		// #endregion shield_layer
 	}

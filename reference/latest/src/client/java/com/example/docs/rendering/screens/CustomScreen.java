@@ -53,8 +53,8 @@ public class CustomScreen extends Screen {
 	}
 
 	@Override
-	public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float delta) {
-		super.extractRenderState(graphics, mouseX, mouseY, delta);
+	public void extractRenderState(GuiGraphicsExtractor graphics) {
+		super.extractRenderState(graphics);
 
 		// Minecraft doesn't have a "label" widget, so we'll have to draw our own text.
 		// We'll subtract the font height from the Y position to make the text appear above the button.

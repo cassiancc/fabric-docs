@@ -5,10 +5,12 @@ import java.util.List;
 import net.minecraft.client.color.block.BlockTintSource;
 import net.minecraft.client.color.block.BlockTintSources;
 import net.minecraft.client.color.item.ItemTintSources;
+import net.minecraft.client.core.registries.BuiltInClientRegistries;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.client.renderer.block.FluidModel;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.minecraft.world.level.block.Blocks;
@@ -26,7 +28,7 @@ public class ExampleModAppearanceClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		// #region register_item_tint_source
-		ItemTintSources.ID_MAPPER.put(ExampleMod.id("color"), RainTintSource.MAP_CODEC);
+		Registry.register(BuiltInClientRegistries.ITEM_TINT_SOURCE_TYPE, ExampleMod.id("color"), RainTintSource.MAP_CODEC);
 		// #endregion register_item_tint_source
 		// #region color_provider
 		BlockColorRegistry.register(List.of(new BlockTintSource() {
@@ -50,8 +52,7 @@ public class ExampleModAppearanceClient implements ClientModInitializer {
 
 		// #region fluid_texture
 		FluidRenderingRegistry.register(
-				ModFluids.ACID_STILL,
-				ModFluids.ACID_FLOWING,
+				ModFluids.ACID,
 				new FluidModel.Unbaked(
 						new Material(Identifier.withDefaultNamespace("block/water_still")),
 						new Material(Identifier.withDefaultNamespace("block/water_flow")),

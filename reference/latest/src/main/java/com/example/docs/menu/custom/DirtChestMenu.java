@@ -57,7 +57,8 @@ public class DirtChestMenu extends AbstractContainerMenu {
 								this.container,
 								slot,
 								CONTAINER_START_X + x * SLOT_SIZE,
-								CONTAINER_START_Y + y * SLOT_SIZE
+								CONTAINER_START_Y + y * SLOT_SIZE,
+								Slot.Section.CONTAINER
 				));
 			}
 		}

@@ -15,9 +15,13 @@ import com.example.docs.interface_injection.BucketEmptySoundGetter;
 // #region interface_injection_example_mixin
 @Mixin(FlowingFluid.class)
 abstract class FlowingFluidMixin extends Fluid implements BucketEmptySoundGetter {
+	protected FlowingFluidMixin(Properties properties) {
+		super(properties);
+	}
+
 	@Override
 	public Optional<SoundEvent> example_mod$getBucketEmptySound() {
-		return Optional.of(this.is(FluidTags.LAVA) ? SoundEvents.BUCKET_EMPTY_LAVA : SoundEvents.BUCKET_EMPTY);
+		return Optional.of(this.defaultFluidState().is(FluidTags.LAVA) ? SoundEvents.BUCKET_EMPTY_LAVA : SoundEvents.BUCKET_EMPTY);
 	}
 }
 // #endregion interface_injection_example_mixin

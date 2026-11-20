@@ -36,7 +36,7 @@ public class CustomSoundItem extends Item {
 			// Play the sound and specify location, category and who made the sound.
 			// No entity made the sound, so we specify null.
 			context.getLevel().playSound(null, context.getClickedPos(),
-					SoundEvents.COPPER_PLACE, SoundSource.PLAYERS,
+					SoundEvents.COPPER.placeSound().get(), SoundSource.PLAYERS,
 					1f, 1f);
 		}
 

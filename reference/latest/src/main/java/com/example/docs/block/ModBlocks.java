@@ -17,9 +17,9 @@ import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.level.block.sounds.BlockSoundSets;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 
@@ -47,7 +47,7 @@ public class ModBlocks {
 	// #region acid
 	public static final Block ACID = register(
 			ModBlockIds.ACID,
-			(props) -> new LiquidBlock(ModFluids.ACID_STILL, props),
+			(props) -> new LiquidBlock(ModFluids.ACID, props),
 			BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)
 	);
 	// #endregion acid
@@ -56,7 +56,7 @@ public class ModBlocks {
 	public static final Block CONDENSED_DIRT = register(
 			ModBlockItemIds.CONDENSED_DIRT,
 			Block::new,
-			BlockBehaviour.Properties.of().sound(SoundType.GRASS)
+			BlockBehaviour.Properties.of().sound(BlockSoundSets.GRASS)
 	);
 	// #endregion condensed_dirt
 
@@ -64,7 +64,7 @@ public class ModBlocks {
 	public static final Block CONDENSED_OAK_LOG = register(
 			ModBlockItemIds.CONDENSED_OAK_LOG,
 			RotatedPillarBlock::new,
-			BlockBehaviour.Properties.of().sound(SoundType.WOOD)
+			BlockBehaviour.Properties.of().sound(BlockSoundSets.WOOD)
 	);
 	// #endregion condensed_oak_log
 
@@ -103,7 +103,7 @@ public class ModBlocks {
 			ModBlockItemIds.PRISMARINE_LAMP,
 			PrismarineLampBlock::new,
 			BlockBehaviour.Properties.of()
-					.sound(SoundType.LANTERN)
+					.sound(BlockSoundSets.LANTERN)
 					.lightLevel(PrismarineLampBlock::getLuminance)
 	);
 	// #endregion prismarine_lamp

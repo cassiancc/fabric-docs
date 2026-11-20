@@ -39,8 +39,8 @@ public class ExampleModMagicSkillsScreen extends Screen {
 	}
 
 	@Override
-	public void extractRenderState(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
-		super.extractRenderState(graphics, mouseX, mouseY, a);
+	public void extractRenderState(@NonNull GuiGraphicsExtractor graphics) {
+		super.extractRenderState(graphics);
 		graphics.text(this.font, "Magic Skills", 40, 40 - this.font.lineHeight - 10, 0xFFFFFFFF, true);
 	}
 }

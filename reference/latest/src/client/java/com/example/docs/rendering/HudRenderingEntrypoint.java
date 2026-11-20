@@ -20,7 +20,7 @@ public class HudRenderingEntrypoint implements ClientModInitializer {
 		HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, ExampleMod.id("before_chat"), HudRenderingEntrypoint::extract);
 	}
 
-	private static void extract(GuiGraphicsExtractor graphics, DeltaTracker tickCounter) {
+	private static void extract(GuiGraphicsExtractor graphics) {
 		int color = 0xFFFF0000; // Red
 		int targetColor = 0xFF00FF00; // Green
 

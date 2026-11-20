@@ -1,7 +1,7 @@
 package com.example.docs.block.entity.custom;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -88,7 +88,7 @@ public class CounterBlockEntity extends BlockEntity {
 
 	// #region get_update_tag
 	@Override
-	public CompoundTag getUpdateTag(HolderLookup.Provider registryLookup) {
+	public CompoundTag getUpdateTag(HolderGetter.Provider registryLookup) {
 		return saveWithoutMetadata(registryLookup);
 	}
 	// #endregion get_update_tag
