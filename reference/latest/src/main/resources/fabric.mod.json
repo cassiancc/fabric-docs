@@ -39,7 +39,6 @@
       "com.example.docs.ExampleModDynamicSound",
       "com.example.docs.ExampleModClient",
       "com.example.docs.ExampleModScreens",
-      "com.example.docs.rendering.CustomRenderPipeline",
       "com.example.docs.rendering.HudRenderingEntrypoint",
       "com.example.docs.rendering.RenderingConceptsEntrypoint",
       "com.example.docs.network.basic.ExampleModNetworkingBasicClient",
@@ -60,7 +59,7 @@
   ],
   "depends": {
     "fabricloader": ">=0.19.0",
-    "minecraft": "26.4-snapshot-10",
+    "minecraft": ">26.3",
     "java": ">=25",
     "fabric-api": "0.166.4+26.4"
   },
